@@ -95,6 +95,7 @@ export const schema: FormSchema = {
     event: [],
     summary: [titleCondition],
     country: [requiredCondition],
+    districts: [],
     start_date: [requiredCondition],
     request_assistance: [],
     ns_request_assistance: [],

@@ -681,7 +681,7 @@ export function transformFormFieldsToAPIFields(formValues: FormType): FieldRepor
   };
 }
 
-export interface FieldReportAPIResponseFields extends Omit<FieldReportAPIFields, 'user' | 'dtype' | 'event' | 'countries' | 'actions_taken'> {
+export interface FieldReportAPIResponseFields extends Omit<FieldReportAPIFields, 'user' | 'dtype' | 'event' | 'countries' | 'districts' | 'actions_taken'> {
   id: number;
   user: {
     id: number;
@@ -694,6 +694,9 @@ export interface FieldReportAPIResponseFields extends Omit<FieldReportAPIFields,
     name: string;
   };
   countries: {
+    id: number;
+  }[];
+  districts: {
     id: number;
   }[];
   actions_taken: {
@@ -996,7 +999,7 @@ export function transformAPIFieldsToFormFields(apiValues: FieldReportAPIResponse
     dtype,
     event,
     country,
-    districts,
+    districts: districts?.map(d => d.id) ?? [],
     external_partners,
     is_covid_report,
     supported_activities,
@@ -1069,7 +1072,7 @@ export function transformAPIFieldsToFormFields(apiValues: FieldReportAPIResponse
     contact_media_email,
     contact_media_phone,
 
-    sit_fields_date,
+    sit_fields_date: isDefined(sit_fields_date) ? sit_fields_date.split('T')[0] : sit_fields_date,
     visibility,
     dref,
     dref_amount,

@@ -1,4 +1,4 @@
-
+import { isNotDefined } from '@togglecorp/fujs';
 import { FormatDateException } from './exception/FormatDateException';
 import { DateTime } from 'luxon';
 import { get } from '#utils/utils';
@@ -207,6 +207,8 @@ export function intersperse (arr, sep) {
 }
 
 export function yesno (bool) {
-  if (!bool) return '-';
+  if (isNotDefined(bool)) {
+    return '-';
+  }
   return bool ? 'Yes' : 'No';
 }

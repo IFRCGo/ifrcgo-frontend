@@ -126,23 +126,6 @@ function NewFieldReportForm(props: Props) {
     }
   }, [fieldReportResponse, onValueSet, setInitialEventOptions]);
 
-  /*
-  const [fieldReportSubmitPending, ,submitRequest] = useOldRequest(
-    isDefined(reportId) ? (
-      `api/v2/update_field_report/${reportId}/`
-    ) : (
-      'api/v2/create_field_report/'
-    ),
-    reportId ? putRequestOptions : postRequestOptions,
-    {
-      lazy: true,
-      // TODO: remove following after converting useOldRequest to TS
-      preserveResponse: true,
-      debug: false,
-    },
-  ) as [boolean, any, (o: any) => void];
-  */
-
   const {
     pending: fieldReportSubmitPending,
     trigger: submitRequest,
