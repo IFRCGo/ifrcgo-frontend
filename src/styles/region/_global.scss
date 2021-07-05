@@ -304,23 +304,21 @@
 
           $height-map: 500px;
           $width-country-details: 295px;
-          $width-popup: 295px;
-          $height-popup: 180px;
+          $width-popup: 100%;
+          $height-popup: 100%;
 
           .regional-threew-map {
             height: $height-map;
             flex-grow: 1;
-            
+
             .active-ns-count__wrap {
-              height: $height-popup;
               overflow: auto;
             }
 
             .regional-map-threew-activity-details {
+              border: $base-border-width solid $base-border-color;
               padding: 10px!important;
-              //height: $height-popup;
-              width: $width-popup;
-              overflow: hidden;
+              overflow: auto;
               display: flex;
               flex-direction: column;
               box-shadow: $base-box-shadow;
@@ -350,7 +348,7 @@
                 flex-grow: 1;
                 display: flex;
                 flex-direction: column;
-                //overflow: auto;
+                overflow: auto;
 
                 .status-counts {
                   display: flex;

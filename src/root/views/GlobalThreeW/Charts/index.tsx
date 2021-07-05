@@ -12,6 +12,7 @@ import {
   Legend,
   ResponsiveContainer,
   LabelList,
+  Text,
 } from 'recharts';
 
 import { sum } from '#utils/common';
@@ -98,21 +99,30 @@ function CustomYAxisTick (props: {
   } = props;
 
 
-  const { value } = payload as { value: number };
+  const { value } = payload as { value: string };
+
+  let fontSize = 12;
+
+  if (value) {
+    const nl = Math.sqrt(value.length);
+    if (!Number.isNaN(nl)) {
+      fontSize = Math.max(8, 16 - nl);
+    }
+  }
 
   return (
     <g transform={`translate(${0},${y})`}>
-      <text
+      <Text
         x={0}
         y={0}
         width={width}
         textAnchor="start"
         className={styles.tick}
+        fontSize={fontSize}
+        verticalAnchor="middle"
       >
-        <tspan>
-          {value}
-        </tspan>
-      </text>
+        {value}
+      </Text>
     </g>
   );
 }
@@ -167,7 +177,7 @@ function ThreeWBarChart(props: BarChartProps) {
           bottom: 0,
           left: 0,
         } : {
-          top: 10,
+          top: 5,
           right: 30,
           bottom: 10,
           left: 10,
@@ -182,10 +192,17 @@ function ThreeWBarChart(props: BarChartProps) {
           type="category"
           scale="band"
           axisLine={false}
-          width={limitHeight ? 186 : 164}
+          width={160}
           tick={CustomYAxisTick}
         />
-        {!hideTooltip && <Tooltip />}
+        {!hideTooltip && (
+          <Tooltip
+            allowEscapeViewBox={{
+              x: false,
+              y: false,
+            }}
+          />
+        )}
         <Bar
           radius={5}
           dataKey="value"
